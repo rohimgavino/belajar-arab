@@ -1,0 +1,94 @@
+:root { --green:#173f35; --cream:#f6f0e2; --gold:#c79338; --muted:#5f6b65; }
+* { box-sizing: border-box; }
+body { margin:0; color:#19342d; background:#e9e6de; font-family:"Plus Jakarta Sans",sans-serif; line-height:1.75; counter-reset: page 0; }
+.toolbar { position:sticky; top:0; z-index:3; display:flex; justify-content:space-between; align-items:center; padding:12px max(20px,calc((100vw - 850px)/2)); color:white; background:var(--green); }
+.toolbar a { color:white; text-decoration:none; font-weight:700; }
+.toolbar button { border:0; border-radius:99px; padding:10px 18px; color:var(--green); background:var(--cream); font-weight:800; cursor:pointer; }
+.book { width:min(850px,100%); margin:30px auto; }
+.page { min-height:1120px; padding:90px 90px 80px; margin-bottom:24px; background:#fffdf8; box-shadow:0 10px 35px rgba(24,50,43,.12); position: relative; }
+
+/* Running Header/Footer for screen */
+.page:not(.cover)::before {
+  content: "Dasar Membaca Arab Gundul — Modul Belajar";
+  position: absolute;
+  top: 35px;
+  left: 90px;
+  right: 90px;
+  font-size: 10px;
+  color: var(--muted);
+  font-family: "Plus Jakarta Sans", sans-serif;
+  border-bottom: 1px solid #ded8ca;
+  padding-bottom: 5px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+.page:not(.cover)::after {
+  content: "Halaman " counter(page);
+  counter-increment: page;
+  position: absolute;
+  bottom: 35px;
+  right: 90px;
+  font-size: 11px;
+  color: var(--muted);
+  font-family: "Plus Jakarta Sans", sans-serif;
+  letter-spacing: 0.05em;
+}
+.cover { display:flex; flex-direction:column; color:var(--cream); background:var(--green); }
+.cover-mark { width:60px; height:60px; display:grid; place-items:center; border:1px solid #d8b873; border-radius:50%; font:700 38px/1 "Amiri",serif; }
+.kicker,.chapter { color:var(--gold); font-size:12px; font-weight:800; letter-spacing:.18em; text-transform:uppercase; }
+.cover .kicker { margin-top:150px; }
+h1 { margin:12px 0 22px; font-size:68px; line-height:1.05; letter-spacing:-.05em; }
+.subtitle { max-width:500px; color:#c9d8d1; font-size:18px; }
+.cover-arabic { margin:auto 0; padding:25px 0; border-top:1px solid #527267; border-bottom:1px solid #527267; font:700 38px/1.8 "Amiri",serif; text-align:center; }
+.edition { color:#b6c8c0; font-size:12px; }
+h2 { margin:8px 0 24px; font-size:42px; line-height:1.2; letter-spacing:-.04em; }
+h3 { margin-top:36px; font-size:20px; }
+p,li { color:var(--muted); }
+.callout,.note { margin:30px 0; padding:22px 26px; border-left:4px solid var(--gold); background:#f6f0e2; }
+.callout p { margin:5px 0 0; }
+table { width:100%; margin:25px 0; border-collapse:collapse; }
+th,td { padding:14px; border:1px solid #ded8ca; text-align:left; }
+th { color:var(--green); background:#f5f1e7; }
+.ar { color:var(--green); font:700 24px/1.7 "Amiri",serif; }
+.arabic-box { margin:28px 0; padding:24px; border-radius:12px; color:var(--green); background:#f2eee4; font:700 42px/1.8 "Amiri",serif; text-align:center; }
+.analysis { display:flex; align-items:center; justify-content:center; gap:26px; margin:35px 0; }
+.analysis div { min-width:180px; padding:18px; border:1px solid #ded8ca; text-align:center; }
+.analysis span,.analysis small,.jar-list small { display:block; color:var(--muted); font:600 12px/1.5 "Plus Jakarta Sans",sans-serif; }
+.analysis strong { display:block; font-size:34px; }
+.jar-list { display:grid; grid-template-columns:repeat(5,1fr); gap:8px; margin:30px 0; }
+.jar-list > span { padding:14px 5px; border:1px solid #ded8ca; text-align:center; }
+.closing { margin-top:60px; padding:35px; color:white; background:var(--green); font-weight:700; text-align:center; }
+@media(max-width:700px) {
+  .page { min-height:0; padding:45px 25px; }
+  .page:not(.cover)::before, .page:not(.cover)::after { display: none; }
+  h1 { font-size:48px; }
+  .analysis { flex-direction:column; }
+  .jar-list { grid-template-columns:repeat(2,1fr); }
+  .book { margin:0; }
+}
+@media print {
+  @page { size:A4; margin:0; }
+  body { background:white; counter-reset: page 0; }
+  .toolbar { display:none; }
+  .book { width:auto; margin:0; }
+  .page {
+    width:210mm;
+    height:297mm;
+    min-height:297mm;
+    margin:0;
+    padding:25mm 20mm;
+    box-shadow:none;
+    page-break-after:always;
+    break-after:page;
+    position:relative;
+  }
+  .page:not(.cover)::before {
+    top:15mm;
+    left:20mm;
+    right:20mm;
+  }
+  .page:not(.cover)::after {
+    bottom:15mm;
+    right:20mm;
+  }
+}
